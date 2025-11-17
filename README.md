@@ -9,15 +9,30 @@ Este código implementa um web scraper simples em Go utilizando a biblioteca Col
 ```go
 import (
     "fmt"
+    "os"
     "github.com/gocolly/colly"
 )
 ```
 
 - **fmt**: Pacote padrão do Go para formatação e impressão de dados
+- **os**: Para operações com arquivos
 - **colly**: Framework para web scraping que facilita a coleta de dados de websites
 
 ## Estrutura do Código
 
+
+### Criação do Arquivo de Saída
+
+```go
+file, err := os.Create("links_coletados.txt")
+if err != nil {
+	fmt.Println("Erro ao criar arquivo:", err)
+	return
+}
+defer file.Close()
+```
+
+Cria um arquivo chamado `links_coletados.txt` no diretório atual e verifica se houve erro na criação, `defer file.Close()` garante que o arquivo será fechado ao final da execução
 ### Inicialização do Collector
 
 ```go
